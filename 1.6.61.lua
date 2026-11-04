@@ -9,6 +9,7 @@
     To view the source code, see the `src/` folder on the official GitHub repository.
     
     Author: Footagesus (Footages, .ftgs, oftgs)
+    Modified by: NOCTA
     Github: https://github.com/Footagesus/WindUI
     Discord: https://discord.gg/ftgs-development-hub-1300692552005189632
     License: MIT
@@ -81,14 +82,12 @@ local l
 
 local m={
 Font="rbxassetid://12187365364",
-Localization=nil,
 CanDraggable=true,
 Theme=nil,
 Themes=nil,
 Icons=j,
 Signals={},
 Objects={},
-LocalizationObjects={},
 FontObjects={},
 Language=string.match(g.SystemLocaleId,"^[a-z]+"),
 Request=http_request or(syn and syn.request)or request,
@@ -349,14 +348,6 @@ m.UpdateTheme(p,false)
 return p
 end
 
-function m.AddLangObject(p)
-local r=m.LocalizationObjects[p]
-local u=r.Object
-local v=currentObjTranslationId
-m.UpdateLang(u,v)
-return u
-end
-
 function m.UpdateTheme(p,r)
 local function ApplyTheme(u)
 for v,x in pairs(u.Properties or{})do
@@ -420,69 +411,6 @@ end
 end
 end
 
-function m.SetLangForObject(p)
-if m.Localization and m.Localization.Enabled then
-local r=m.LocalizationObjects[p]
-if not r then return end
-
-local u=r.Object
-local v=r.TranslationId
-
-local x=m.Localization.Translations[m.Language]
-if x and x[v]then
-u.Text=x[v]
-else
-local z=m.Localization and m.Localization.Translations and m.Localization.Translations.en or nil
-if z and z[v]then
-u.Text=z[v]
-else
-u.Text="["..v.."]"
-end
-end
-end
-end
-
-function m.ChangeTranslationKey(p,r,u)
-if m.Localization and m.Localization.Enabled then
-local v=string.match(u,"^"..m.Localization.Prefix.."(.+)")
-if v then
-for x,z in ipairs(m.LocalizationObjects)do
-if z.Object==r then
-z.TranslationId=v
-m.SetLangForObject(x)
-return
-end
-end
-
-table.insert(m.LocalizationObjects,{
-TranslationId=v,
-Object=r
-})
-m.SetLangForObject(#m.LocalizationObjects)
-end
-end
-end
-
-function m.UpdateLang(p)
-if p then
-m.Language=p
-end
-
-for r=1,#m.LocalizationObjects do
-local u=m.LocalizationObjects[r]
-if u.Object and u.Object.Parent~=nil then
-m.SetLangForObject(r)
-else
-m.LocalizationObjects[r]=nil
-end
-end
-end
-
-function m.SetLanguage(p)
-m.Language=p
-m.UpdateLang()
-end
-
 function m.Icon(p,r)
 return j.Icon(p,nil,r~=false)
 end
@@ -501,15 +429,6 @@ end
 for A,B in next,r or{}do
 if A~="ThemeTag"then
 v[A]=B
-end
-if m.Localization and m.Localization.Enabled and A=="Text"then
-local C=string.match(B,"^"..m.Localization.Prefix.."(.+)")
-if C then
-local F=#m.LocalizationObjects+1
-m.LocalizationObjects[F]={TranslationId=C,Object=v}
-
-m.SetLangForObject(F)
-end
 end
 end
 
@@ -772,32 +691,7 @@ return J
 end
 
 
-return m end function a.c()
-
-local b={}
-
-
-
-
-
-
-
-function b.New(e,f,g)
-local h={
-Enabled=f.Enabled or false,
-Translations=f.Translations or{},
-Prefix=f.Prefix or"loc:",
-DefaultLanguage=f.DefaultLanguage or"en"
-}
-
-g.Localization=h
-
-return h
-end
-
-
-
-return b end function a.d()
+return m end function a.d()
 local b=a.load'b'
 local e=b.New
 local f=b.Tween
@@ -2335,346 +2229,6 @@ az.Position=UDim2.new(1,0,0.5,0)
 ak:Open()
 end
 
-return aa end function a.n()
-
-
-local function map(aa,ab,ac,ad,ae)
-return(aa-ab)*(ae-ad)/(ac-ab)+ad
-end
-
-local function viewportPointToWorld(aa,ab)
-local ac=game:GetService"Workspace".CurrentCamera:ScreenPointToRay(aa.X,aa.Y)
-return ac.Origin+ac.Direction*ab
-end
-
-local function getOffset()
-local aa=game:GetService"Workspace".CurrentCamera.ViewportSize.Y
-return map(aa,0,2560,8,56)
-end
-
-return{viewportPointToWorld,getOffset}end function a.o()
-
-
-
-local aa=a.load'b'
-local ab=aa.New
-
-
-local ac,ad=unpack(a.load'n')
-local ae=Instance.new("Folder",game:GetService"Workspace".CurrentCamera)
-
-
-local function createAcrylic()
-local af=ab("Part",{
-Name="Body",
-Color=Color3.new(0,0,0),
-Material=Enum.Material.Glass,
-Size=Vector3.new(1,1,0),
-Anchored=true,
-CanCollide=false,
-Locked=true,
-CastShadow=false,
-Transparency=0.98,
-},{
-ab("SpecialMesh",{
-MeshType=Enum.MeshType.Brick,
-Offset=Vector3.new(0,0,-1E-6),
-}),
-})
-
-return af
-end
-
-
-local function createAcrylicBlur(af)
-local ag={}
-
-af=af or 0.001
-local ah={
-topLeft=Vector2.new(),
-topRight=Vector2.new(),
-bottomRight=Vector2.new(),
-}
-local ai=createAcrylic()
-ai.Parent=ae
-
-local function updatePositions(aj,ak)
-ah.topLeft=ak
-ah.topRight=ak+Vector2.new(aj.X,0)
-ah.bottomRight=ak+aj
-end
-
-local function render()
-local aj=game:GetService"Workspace".CurrentCamera
-if aj then
-aj=aj.CFrame
-end
-local ak=aj
-if not ak then
-ak=CFrame.new()
-end
-
-local al=ak
-local am=ah.topLeft
-local an=ah.topRight
-local ao=ah.bottomRight
-
-local ap=ac(am,af)
-local aq=ac(an,af)
-local ar=ac(ao,af)
-
-local as=(aq-ap).Magnitude
-local at=(aq-ar).Magnitude
-
-ai.CFrame=
-CFrame.fromMatrix((ap+ar)/2,al.XVector,al.YVector,al.ZVector)
-ai.Mesh.Scale=Vector3.new(as,at,0)
-end
-
-local function onChange(aj)
-local ak=ad()
-local al=aj.AbsoluteSize-Vector2.new(ak,ak)
-local am=aj.AbsolutePosition+Vector2.new(ak/2,ak/2)
-
-updatePositions(al,am)
-task.spawn(render)
-end
-
-local function renderOnChange()
-local aj=game:GetService"Workspace".CurrentCamera
-if not aj then
-return
-end
-
-table.insert(ag,aj:GetPropertyChangedSignal"CFrame":Connect(render))
-table.insert(ag,aj:GetPropertyChangedSignal"ViewportSize":Connect(render))
-table.insert(ag,aj:GetPropertyChangedSignal"FieldOfView":Connect(render))
-task.spawn(render)
-end
-
-ai.Destroying:Connect(function()
-for aj,ak in ag do
-pcall(function()
-ak:Disconnect()
-end)
-end
-end)
-
-renderOnChange()
-
-return onChange,ai
-end
-
-return function(af)
-local ag={}
-local ah,ai=createAcrylicBlur(af)
-
-local aj=ab("Frame",{
-BackgroundTransparency=1,
-Size=UDim2.fromScale(1,1),
-})
-
-aa.AddSignal(aj:GetPropertyChangedSignal"AbsolutePosition",function()
-ah(aj)
-end)
-
-aa.AddSignal(aj:GetPropertyChangedSignal"AbsoluteSize",function()
-ah(aj)
-end)
-
-ag.AddParent=function(ak)
-aa.AddSignal(ak:GetPropertyChangedSignal"Visible",function()
-ag.SetVisibility(ak.Visible)
-end)
-end
-
-ag.SetVisibility=function(ak)
-ai.Transparency=ak and 0.98 or 1
-end
-
-ag.Frame=aj
-ag.Model=ai
-
-return ag
-end end function a.p()
-
-
-
-local aa=a.load'b'
-local ab=a.load'o'
-
-local ac=aa.New
-
-return function(ad)
-local ae={}
-
-ae.Frame=ac("Frame",{
-Size=UDim2.fromScale(1,1),
-BackgroundTransparency=1,
-BackgroundColor3=Color3.fromRGB(255,255,255),
-BorderSizePixel=0,
-},{
-
-
-
-
-
-
-
-
-
-
-
-
-ac("UICorner",{
-CornerRadius=UDim.new(0,8),
-}),
-
-ac("Frame",{
-BackgroundTransparency=1,
-Size=UDim2.fromScale(1,1),
-Name="Background",
-ThemeTag={
-BackgroundColor3="AcrylicMain",
-},
-},{
-ac("UICorner",{
-CornerRadius=UDim.new(0,8),
-}),
-}),
-
-ac("Frame",{
-BackgroundColor3=Color3.fromRGB(255,255,255),
-BackgroundTransparency=1,
-Size=UDim2.fromScale(1,1),
-},{
-
-
-
-
-
-
-
-
-
-
-}),
-
-ac("ImageLabel",{
-Image="rbxassetid://9968344105",
-ImageTransparency=0.98,
-ScaleType=Enum.ScaleType.Tile,
-TileSize=UDim2.new(0,128,0,128),
-Size=UDim2.fromScale(1,1),
-BackgroundTransparency=1,
-},{
-ac("UICorner",{
-CornerRadius=UDim.new(0,8),
-}),
-}),
-
-ac("ImageLabel",{
-Image="rbxassetid://9968344227",
-ImageTransparency=0.9,
-ScaleType=Enum.ScaleType.Tile,
-TileSize=UDim2.new(0,128,0,128),
-Size=UDim2.fromScale(1,1),
-BackgroundTransparency=1,
-ThemeTag={
-ImageTransparency="AcrylicNoise",
-},
-},{
-ac("UICorner",{
-CornerRadius=UDim.new(0,8),
-}),
-}),
-
-ac("Frame",{
-BackgroundTransparency=1,
-Size=UDim2.fromScale(1,1),
-ZIndex=2,
-},{
-
-
-
-
-
-
-
-
-
-
-}),
-})
-
-
-local af
-
-task.wait()
-if ad.UseAcrylic then
-af=ab()
-
-af.Frame.Parent=ae.Frame
-ae.Model=af.Model
-ae.AddParent=af.AddParent
-ae.SetVisibility=af.SetVisibility
-end
-
-return ae,af
-end end function a.q()
-
-
-
-local aa={
-AcrylicBlur=a.load'o',
-
-AcrylicPaint=a.load'p',
-}
-
-function aa.init()
-local ab=Instance.new"DepthOfFieldEffect"
-ab.FarIntensity=0
-ab.InFocusRadius=0.1
-ab.NearIntensity=1
-
-local ac={}
-
-function aa.Enable()
-for ad,ae in pairs(ac)do
-ae.Enabled=false
-end
-ab.Parent=game:GetService"Lighting"
-end
-
-function aa.Disable()
-for ad,ae in pairs(ac)do
-ae.Enabled=ae.enabled
-end
-ab.Parent=nil
-end
-
-local function registerDefaults()
-local function register(ad)
-if ad:IsA"DepthOfFieldEffect"then
-ac[ad]={enabled=ad.Enabled}
-end
-end
-
-for ad,ae in pairs(game:GetService"Lighting":GetChildren())do
-register(ae)
-end
-
-if game:GetService"Workspace".CurrentCamera then
-for af,ag in pairs(game:GetService"Workspace".CurrentCamera:GetChildren())do
-register(ag)
-end
-end
-end
-
-registerDefaults()
-aa.Enable()
-end
-
 return aa end function a.r()
 
 local aa={}
@@ -3541,317 +3095,7 @@ return ah
 end
 
 
-return aa end function a.w()
-local aa=game:GetService"HttpService"
-
-local ab
-
-local ac
-ac={
-Folder=nil,
-Path=nil,
-Configs={},
-Parser={
-Colorpicker={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Default:ToHex(),
-transparency=ad.Transparency or nil,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Update then
-ad:Update(Color3.fromHex(ae.value),ae.transparency or nil)
-end
-end
-},
-Dropdown={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Value,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Select then
-ad:Select(ae.value)
-end
-end
-},
-Input={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Value,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Set then
-ad:Set(ae.value)
-end
-end
-},
-Keybind={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Value,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Set then
-ad:Set(ae.value)
-end
-end
-},
-Slider={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Value.Default,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Set then
-ad:Set(tonumber(ae.value))
-end
-end
-},
-Toggle={
-Save=function(ad)
-return{
-__type=ad.__type,
-value=ad.Value,
-}
-end,
-Load=function(ad,ae)
-if ad and ad.Set then
-ad:Set(ae.value)
-end
-end
-},
-}
-}
-
-function ac.Init(ad,ae)
-if not ae.Folder then
-warn"[ WindUI.ConfigManager ] Window.Folder is not specified."
-return false
-end
-
-ab=ae
-ac.Folder=ab.Folder
-ac.Path="WindUI/"..tostring(ac.Folder).."/config/"
-
-if not isfolder("WindUI/"..ac.Folder)then
-makefolder("WindUI/"..ac.Folder)
-if not isfolder("WindUI/"..ac.Folder.."/config/")then
-makefolder("WindUI/"..ac.Folder.."/config/")
-end
-end
-
-local af=ac:AllConfigs()
-
-for ag,ah in next,af do
-if isfile and readfile and isfile(ah..".json")then
-ac.Configs[ah]=readfile(ah..".json")
-end
-end
-
-return ac
-end
-
-function ac.CreateConfig(ad,ae)
-local af={
-Path=ac.Path..ae..".json",
-Elements={},
-CustomData={},
-Version=1.1
-}
-
-if not ae then
-return false,"No config file is selected"
-end
-
-function af.SetAsCurrent(ag)
-ab:SetCurrentConfig(af)
-end
-
-function af.Register(ag,ah,ai)
-af.Elements[ah]=ai
-end
-
-function af.Set(ag,ah,ai)
-af.CustomData[ah]=ai
-end
-
-function af.Get(ag,ah)
-return af.CustomData[ah]
-end
-
-function af.Save(ag)
-if ab.PendingFlags then
-for ah,ai in next,ab.PendingFlags do
-af:Register(ah,ai)
-end
-end
-
-local ah={
-__version=af.Version,
-__elements={},
-__custom=af.CustomData
-}
-
-for ai,aj in next,af.Elements do
-if ac.Parser[aj.__type]then
-ah.__elements[tostring(ai)]=ac.Parser[aj.__type].Save(aj)
-end
-end
-
-local ak=aa:JSONEncode(ah)
-if writefile then
-writefile(af.Path,ak)
-end
-
-return ah
-end
-
-function af.Load(ag)
-if isfile and not isfile(af.Path)then
-return false,"Config file does not exist"
-end
-
-local ah,ai=pcall(function()
-local ah=readfile or function()
-warn"[ WindUI.ConfigManager ] The config system doesn't work in the studio."
-return nil
-end
-return aa:JSONDecode(ah(af.Path))
-end)
-
-if not ah then
-return false,"Failed to parse config file"
-end
-
-if not ai.__version then
-local aj={
-__version=af.Version,
-__elements=ai,
-__custom={}
-}
-ai=aj
-end
-
-if ab.PendingFlags then
-for aj,ak in next,ab.PendingFlags do
-af:Register(aj,ak)
-end
-end
-
-for aj,ak in next,(ai.__elements or{})do
-if af.Elements[aj]and ac.Parser[ak.__type]then
-task.spawn(function()
-ac.Parser[ak.__type].Load(af.Elements[aj],ak)
-end)
-end
-end
-
-af.CustomData=ai.__custom or{}
-
-return af.CustomData
-end
-
-function af.Delete(ag)
-if not delfile then
-return false,"delfile function is not available"
-end
-
-if not isfile(af.Path)then
-return false,"Config file does not exist"
-end
-
-local ah,ai=pcall(function()
-delfile(af.Path)
-end)
-
-if not ah then
-return false,"Failed to delete config file: "..tostring(ai)
-end
-
-ac.Configs[ae]=nil
-
-if ab.CurrentConfig==af then
-ab.CurrentConfig=nil
-end
-
-return true,"Config deleted successfully"
-end
-
-function af.GetData(ag)
-return{
-elements=af.Elements,
-custom=af.CustomData
-}
-end
-
-af:SetAsCurrent()
-ac.Configs[ae]=af
-return af
-end
-
-function ac.DeleteConfig(ad,ae)
-if not delfile then
-return false,"delfile function is not available"
-end
-
-local af=ac.Path..ae..".json"
-
-if not isfile(af)then
-return false,"Config file does not exist"
-end
-
-local ag,ah=pcall(function()
-delfile(af)
-end)
-
-if not ag then
-return false,"Failed to delete config file: "..tostring(ah)
-end
-
-ac.Configs[ae]=nil
-
-if ab.CurrentConfig and ab.CurrentConfig.Path==af then
-ab.CurrentConfig=nil
-end
-
-return true,"Config deleted successfully"
-end
-
-function ac.AllConfigs(ad)
-if not listfiles then return{}end
-
-local ae={}
-if not isfolder(ac.Path)then
-makefolder(ac.Path)
-return ae
-end
-
-for af,ag in next,listfiles(ac.Path)do
-local ah=ag:match"([^\\/]+)%.json$"
-if ah then
-table.insert(ae,ah)
-end
-end
-
-return ae
-end
-
-function ac.GetConfig(ad,ae)
-return ac.Configs[ae]
-end
-
-return ac end function a.x()
+return aa end function a.x()
 local aa={}
 
 local ab=a.load'b'
@@ -4096,7 +3340,6 @@ end
 if ah then
 if ap.Title then
 ah.Text=ap.Title
-ab:ChangeTranslationKey(ah,ap.Title)
 elseif ap.Title==nil then
 
 end
@@ -8225,34 +7468,6 @@ ar.ElementsModule=al local
 
 as, at=ap:New(ar)
 
-if ar.Flag and typeof(ar.Flag)=="string"then
-if ai.CurrentConfig then
-ai.CurrentConfig:Register(ar.Flag,at)
-
-if ai.PendingConfigData and ai.PendingConfigData[ar.Flag]then
-local au=ai.PendingConfigData[ar.Flag]
-
-local av=ai.ConfigManager
-if av.Parser[au.__type]then
-task.defer(function()
-local aw,ax=pcall(function()
-av.Parser[au.__type].Load(at,au)
-end)
-
-if aw then
-ai.PendingConfigData[ar.Flag]=nil
-else
-warn("[ WindUI ] Failed to apply pending config for '"..ar.Flag.."': "..tostring(ax))
-end
-end)
-end
-end
-else
-ai.PendingFlags=ai.PendingFlags or{}
-ai.PendingFlags[ar.Flag]=at
-end
-end
-
 local au
 for av,aw in pairs(at)do
 if typeof(aw)=="table"and av:match"Frame$"then
@@ -9539,8 +8754,6 @@ game:GetService"RunService"
 
 local ae=workspace.CurrentCamera
 
-local ag=a.load'q'
-
 local ai=a.load'b'
 local aj=ai.New
 local ak=ai.Tween
@@ -9550,8 +8763,6 @@ local al=a.load't'.New
 local am=a.load'j'.New
 local an=a.load'u'.New
 local ao=a.load'v'
-
-local ap=a.load'w'
 
 
 
@@ -9583,7 +8794,6 @@ Transparent=aq.Transparent or false,
 HideSearchBar=aq.HideSearchBar~=false,
 ScrollBarEnabled=aq.ScrollBarEnabled or false,
 SideBarWidth=aq.SideBarWidth or 200,
-Acrylic=aq.Acrylic or false,
 NewElements=aq.NewElements or false,
 IgnoreAlerts=aq.IgnoreAlerts or false,
 HidePanelBackground=aq.HidePanelBackground or false,
@@ -9602,9 +8812,6 @@ IsFullscreen=false,
 CanResize=aq.Resizable~=false,
 IsOpenButtonEnabled=true,
 
-CurrentConfig=nil,
-ConfigManager=nil,
-AcrylicPaint=nil,
 CurrentTab=nil,
 TabModule=nil,
 
@@ -9620,8 +8827,6 @@ TopBarButtons={},
 AllElements={},
 
 ElementConfig={},
-
-PendingFlags={},
 }
 
 ar.UICorner=ar.Radius
@@ -9657,17 +8862,6 @@ end
 local at=aj("UICorner",{
 CornerRadius=UDim.new(0,ar.UICorner)
 })
-
-if ar.Folder then
-ar.ConfigManager=ap:Init(ar)
-end
-
-
-if ar.Acrylic then local
-au, av=ag.AcrylicPaint{UseAcrylic=ar.Acrylic}
-
-ar.AcrylicPaint=au
-end
 
 local au=aj("Frame",{
 Size=UDim2.new(0,32,0,32),
@@ -10179,7 +9373,6 @@ Parent=aq.Parent,
 AnchorPoint=Vector2.new(0.5,0.5),
 Active=true,
 },{
-ar.AcrylicPaint and ar.AcrylicPaint.Frame or nil,
 ax,
 ai.NewRoundFrame(ar.UICorner,"Squircle",{
 ImageTransparency=1,
@@ -10598,10 +9791,6 @@ function ar.OnDestroy(m,p)
 ar.OnDestroyCallback=p
 end
 
-if aq.WindUI.UseAcrylic then
-ar.AcrylicPaint.AddParent(ar.UIElements.Main)
-end
-
 function ar.SetIconSize(m,p)
 local r
 if typeof(p)=="number"then
@@ -10681,8 +9870,6 @@ ar.UIElements.Main.Visible=true
 task.spawn(function()
 task.wait(.05)
 ar.UIElements.Main:WaitForChild"Main".Visible=true
-
-aq.WindUI:ToggleAcrylic(true)
 end)
 end)
 end
@@ -10694,8 +9881,6 @@ task.spawn(function()
 ai.SafeCallback(ar.OnCloseCallback)
 end)
 end
-
-aq.WindUI:ToggleAcrylic(false)
 
 ar.UIElements.Main:WaitForChild"Main".Visible=false
 
@@ -10750,9 +9935,6 @@ if ar.OnDestroyCallback then
 task.spawn(function()
 ai.SafeCallback(ar.OnDestroyCallback)
 end)
-end
-if ar.AcrylicPaint and ar.AcrylicPaint.Model then
-ar.AcrylicPaint.Model:Destroy()
 end
 ar.Destroyed=true
 task.wait(0.4)
@@ -10833,10 +10015,6 @@ end
 function ar.SetToTheCenter(m)
 ak(ar.UIElements.Main,0.45,{Position=UDim2.new(0.5,0,0.5,0)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 return ar
-end
-
-function ar.SetCurrentConfig(m,p)
-ar.CurrentConfig=p
 end
 
 do
@@ -11339,7 +10517,6 @@ local ac={
 Window=nil,
 Theme=nil,
 Creator=a.load'b',
-LocalizationModule=a.load'c',
 NotificationModule=a.load'd',
 Themes=nil,
 Transparent=false,
@@ -11348,7 +10525,6 @@ TransparencyValue=.15,
 
 UIScale=1,
 
-ConfigManager=nil,
 Version="0.0.0",
 
 Services=a.load'h',
@@ -11375,8 +10551,7 @@ local ak=ac.Creator
 local al=ak.New local am=
 ak.Tween
 
-
-local an=a.load'q'local ao=
+local ao=
 
 game:GetService"Players"and game:GetService"Players".LocalPlayer or nil
 
@@ -11485,28 +10660,6 @@ end
 function ac.GetWindowSize(as)
 return Window.UIElements.Main.Size
 end
-function ac.Localization(as,at)
-return ac.LocalizationModule:New(at,ak)
-end
-
-function ac.SetLanguage(as,at)
-if ak.Localization then
-return ak.SetLanguage(at)
-end
-return false
-end
-
-function ac.ToggleAcrylic(as,at)
-if ac.Window and ac.Window.AcrylicPaint and ac.Window.AcrylicPaint.Model then
-ac.Window.Acrylic=at
-ac.Window.AcrylicPaint.Model.Transparency=at and 0.98 or 1
-if at then
-an.Enable()
-else
-an.Disable()
-end
-end
-end
 
 
 
@@ -11559,8 +10712,6 @@ ak.Themes=ac.Themes
 
 
 ac:SetTheme"Dark"
-ac:SetLanguage(ak.Language)
-
 
 function ac.CreateWindow(as,at)
 local au=a.load'X'
@@ -11656,11 +10807,6 @@ local az=au(at)
 
 ac.Transparent=at.Transparent
 ac.Window=az
-
-if at.Acrylic then
-an.init()
-end
-
 
 
 
