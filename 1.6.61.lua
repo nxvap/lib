@@ -4,15 +4,9 @@
     | |/ |/ / / _ \/ _  / /_/ // /  
     |__/|__/_/_//_/\_,_/\____/___/
     
-    v1.6.61  |  2025-11-14  |  Roblox UI Library for scripts
+    v1.0.0  |  2026-11-04  |  Roblox UI Library for scripts
     
-    To view the source code, see the `src/` folder on the official GitHub repository.
-    
-    Author: Footagesus (Footages, .ftgs, oftgs)
     Modified by: NOCTA
-    Github: https://github.com/Footagesus/WindUI
-    Discord: https://discord.gg/ftgs-development-hub-1300692552005189632
-    License: MIT
 ]]
 
 local a a={cache={}, load=function(b)if not a.cache[b]then a.cache[b]={c=a[b]()}end return a.cache[b].c end}do function a.a()return{
@@ -1268,39 +1262,7 @@ Args={"ServiceId","Secret"},
 New=a.load'e'.New
 },
 
-}end function a.i()
-
-
-return[[
-{
-    "name": "windui",
-    "version": "1.6.61",
-    "main": "./dist/main.lua",
-    "repository": "https://github.com/Footagesus/WindUI",
-    "discord": "https://discord.gg/ftgs-development-hub-1300692552005189632",
-    "author": "Footagesus",
-    "description": "Roblox UI Library for scripts",
-    "license": "MIT",
-    "scripts": {
-        "dev": "bash build/build.sh dev $INPUT_FILE",
-        "build": "bash build/build.sh build $INPUT_FILE",
-        "live": "python -m http.server 8642",
-        "watch": "chokidar . -i 'node_modules' -i 'dist' -i 'build' -c 'npm run dev --'",
-        "live-build": "concurrently \"npm run live\" \"npm run watch --\"",
-        "updater": "python updater/main.py"
-    },
-    "keywords": [
-        "ui-library",
-        "ui-design",
-        "script",
-        "script-hub",
-        "exploiting"
-    ],
-    "devDependencies": {
-        "chokidar-cli": "^3.0.0",
-        "concurrently": "^9.2.0"
-    }
-}]]end function a.j()
+}end function a.j()
 
 local aa={}
 
@@ -10525,21 +10487,11 @@ TransparencyValue=.15,
 
 UIScale=1,
 
-Version="0.0.0",
-
 Services=a.load'h',
 
 OnThemeChangeFunction=nil,
 }
 
-
-local ae=game:GetService"HttpService"
-
-
-local ag=ae:JSONDecode(a.load'i')
-if ag then
-ac.Version=ag.version
-end
 
 local ai=a.load'm'local aj=
 
