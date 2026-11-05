@@ -62,7 +62,6 @@ local b=game:GetService"RunService"local d=
 b.Heartbeat
 local e=game:GetService"UserInputService"
 local f=game:GetService"TweenService"
-local g=game:GetService"LocalizationService"
 local h=game:GetService"HttpService"
 
 local i="https://raw.githubusercontent.com/nxvap/lib/main/icons/main.lua"
@@ -84,7 +83,6 @@ Icons=j,
 Signals={},
 Objects={},
 FontObjects={},
-Language=string.match(g.SystemLocaleId,"^[a-z]+"),
 Request=http_request or(syn and syn.request)or request,
 DefaultProperties={
 ScreenGui={
@@ -755,6 +753,7 @@ i.CanClose=true
 end
 g.NotificationIndex=g.NotificationIndex+1
 g.Notifications[g.NotificationIndex]=i
+i._NotificationId=g.NotificationIndex
 
 
 
@@ -942,6 +941,7 @@ i.Closed=true
 f(u,0.45,{Size=UDim2.new(1,0,0,-8)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 f(r,0.55,{Position=UDim2.new(2,0,1,0)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 task.wait(.45)
+g.Notifications[i._NotificationId]=nil
 u:Destroy()
 end
 end
@@ -4248,8 +4248,6 @@ end
 
 RecalculateCanvasSize()
 RecalculateListSize()
-else a.load'I'
-:New{Parent=am.UIElements.Menu.Frame.ScrollingFrame}
 end
 end
 
@@ -4960,7 +4958,6 @@ Tabs={},
 Containers={},
 SelectedTab=nil,
 TabCount=0,
-TabHighlight=nil,
 
 OnChangeFunc=function(al)end
 }
@@ -4968,7 +4965,6 @@ OnChangeFunc=function(al)end
 function al.Init(am,an,ao,ap)
 Window=am
 WindUI=an
-al.TabHighlight=ap
 return al
 end
 
@@ -5197,8 +5193,6 @@ Visible=ao.ShowTabTitle or false,
 al.Containers[ap]=ao.UIElements.ContainerFrameCanvas
 al.Tabs[ap]=ao
 
-ao.ContainerFrame=ContainerFrameCanvas
-
 ae.AddSignal(ao.UIElements.Main.MouseButton1Click,function()
 if not ao.Locked then
 al:SelectTab(ap)
@@ -5389,177 +5383,7 @@ al.OnChangeFunc(an)
 end
 end
 
-return al end function a.U()
-local ac={}
-
-
-local ae=a.load'b'
-local ag=ae.New
-local ai=ae.Tween
-
-local aj=a.load'T'
-
-function ac.New(ak,al,am,an,ao)
-local ap={
-Title=ak.Title or"Section",
-Icon=ak.Icon,
-IconThemed=ak.IconThemed,
-Opened=ak.Opened or false,
-
-HeaderSize=42,
-IconSize=18,
-
-Expandable=false,
-}
-
-local aq
-if ap.Icon then
-aq=ae.Image(
-ap.Icon,
-ap.Icon,
-0,
-am,
-"Section",
-true,
-ap.IconThemed
-)
-
-aq.Size=UDim2.new(0,ap.IconSize,0,ap.IconSize)
-aq.ImageLabel.ImageTransparency=.25
-end
-
-local ar=ag("Frame",{
-Size=UDim2.new(0,ap.IconSize,0,ap.IconSize),
-BackgroundTransparency=1,
-Visible=false
-},{
-ag("ImageLabel",{
-Size=UDim2.new(1,0,1,0),
-BackgroundTransparency=1,
-Image=ae.Icon"chevron-down"[1],
-ImageRectSize=ae.Icon"chevron-down"[2].ImageRectSize,
-ImageRectOffset=ae.Icon"chevron-down"[2].ImageRectPosition,
-ThemeTag={
-ImageColor3="Icon",
-},
-ImageTransparency=.7,
-})
-})
-
-local as=ag("Frame",{
-Size=UDim2.new(1,0,0,ap.HeaderSize),
-BackgroundTransparency=1,
-Parent=al,
-ClipsDescendants=true,
-},{
-ag("TextButton",{
-Size=UDim2.new(1,0,0,ap.HeaderSize),
-BackgroundTransparency=1,
-Text="",
-},{
-aq,
-ag("TextLabel",{
-Text=ap.Title,
-TextXAlignment="Left",
-Size=UDim2.new(
-1,
-aq and(-ap.IconSize-10)*2
-or(-ap.IconSize-10),
-
-1,
-0
-),
-ThemeTag={
-TextColor3="Text",
-},
-FontFace=Font.new(ae.Font,Enum.FontWeight.SemiBold),
-TextSize=14,
-BackgroundTransparency=1,
-TextTransparency=.7,
-
-TextWrapped=true
-}),
-ag("UIListLayout",{
-FillDirection="Horizontal",
-VerticalAlignment="Center",
-Padding=UDim.new(0,10)
-}),
-ar,
-ag("UIPadding",{
-PaddingLeft=UDim.new(0,11),
-PaddingRight=UDim.new(0,11),
-})
-}),
-ag("Frame",{
-BackgroundTransparency=1,
-Size=UDim2.new(1,0,0,0),
-AutomaticSize="Y",
-Name="Content",
-Visible=true,
-Position=UDim2.new(0,0,0,ap.HeaderSize)
-},{
-ag("UIListLayout",{
-FillDirection="Vertical",
-Padding=UDim.new(0,ao.Gap),
-VerticalAlignment="Bottom",
-}),
-})
-})
-
-
-function ap.Tab(at,au)
-if not ap.Expandable then
-ap.Expandable=true
-ar.Visible=true
-end
-au.Parent=as.Content
-return aj.New(au,an)
-end
-
-function ap.Open(at)
-if ap.Expandable then
-ap.Opened=true
-ai(as,0.33,{
-Size=UDim2.new(1,0,0,ap.HeaderSize+(as.Content.AbsoluteSize.Y/an))
-},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-
-ai(ar.ImageLabel,0.1,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end
-end
-function ap.Close(at)
-if ap.Expandable then
-ap.Opened=false
-ai(as,0.26,{
-Size=UDim2.new(1,0,0,ap.HeaderSize)
-},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ai(ar.ImageLabel,0.1,{Rotation=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end
-end
-
-ae.AddSignal(as.TextButton.MouseButton1Click,function()
-if ap.Expandable then
-if ap.Opened then
-ap:Close()
-else
-ap:Open()
-end
-end
-end)
-
-if ap.Opened then
-task.spawn(function()
-task.wait()
-ap:Open()
-end)
-end
-
-
-
-return ap
-end
-
-
-return ac end function a.V()
+return al end function a.V()
 return{
 Tab="table-of-contents",
 Paragraph="type",
@@ -6075,7 +5899,6 @@ end
 
 function am.Close(as)
 task.spawn(function()
-al()
 aq.Frame.Visible=false
 ai(ar.UIScale,.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
@@ -6540,10 +6363,6 @@ end)
 end
 end
 
-local az
-local aA
-
-
 local aB=false
 local aC
 
@@ -6733,7 +6552,6 @@ au,
 
 
 }),
-UIStroke,
 at,
 av,
 aw,
@@ -6752,21 +6570,11 @@ ar.UIElements.SideBarContainer,
 ar.UIElements.MainBar,
 
 ay,
-
-aA,
 aj("Frame",{
 Size=UDim2.new(1,0,0,52),
 BackgroundTransparency=1,
-BackgroundColor3=Color3.fromRGB(50,50,50),
 Name="Topbar"
 },{
-az,
-
-
-
-
-
-
 aj("Frame",{
 AutomaticSize="X",
 Size=UDim2.new(0,0,1,0),
@@ -7189,9 +6997,6 @@ end
 
 
 ak(ax,0.25,{ImageTransparency=ar.ShadowTransparency},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-if UIStroke then
-ak(UIStroke,0.25,{Transparency=.8},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end
 
 task.spawn(function()
 task.wait(.3)
@@ -7210,7 +7015,7 @@ ar.CanDropdown=true
 ar.UIElements.Main.Visible=true
 task.spawn(function()
 task.wait(.05)
-ar.UIElements.Main:WaitForChild"Main".Visible=true
+ar.UIElements.Main.Main.Visible=true
 end)
 end)
 end
@@ -7223,7 +7028,7 @@ ai.SafeCallback(ar.OnCloseCallback)
 end)
 end
 
-ar.UIElements.Main:WaitForChild"Main".Visible=false
+ar.UIElements.Main.Main.Visible=false
 
 ar.CanDropdown=false
 ar.Closed=true
@@ -7252,9 +7057,6 @@ ImageTransparency=1,
 end
 end
 ak(ax,0.25,{ImageTransparency=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-if UIStroke then
-ak(UIStroke,0.25,{Transparency=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end
 
 ak(b,.3,{Size=UDim2.new(0,0,0,4),ImageTransparency=1},Enum.EasingStyle.Exponential,Enum.EasingDirection.InOut):Play()
 ak(au.ImageLabel,.3,{ImageTransparency=1},Enum.EasingStyle.Exponential,Enum.EasingDirection.Out):Play()
@@ -7420,7 +7222,6 @@ end
 
 
 local m=a.load'T'
-local p=a.load'U'
 local r=m.Init(ar,aq.WindUI)
 r:OnChange(function(u)ar.CurrentTab=u end)
 
@@ -7433,10 +7234,6 @@ end
 
 function ar.SelectTab(u,v)
 r:SelectTab(v)
-end
-
-function ar.Section(u,v)
-return p.New(v,ar.UIElements.SideBar.Frame,ar.Folder,aq.WindUI.UIScale,ar)
 end
 
 function ar.IsResizable(u,v)
