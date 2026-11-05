@@ -1632,42 +1632,6 @@ Background=Color3.fromHex"#e4e4e7",
 Button=Color3.fromHex"#18181b",
 Icon=Color3.fromHex"#52525b",
 },
-Rose={
-Name="Rose",
-
-Accent=Color3.fromHex"#be185d",
-Dialog=Color3.fromHex"#4c0519",
-Outline=Color3.fromHex"#fecdd3",
-Text=Color3.fromHex"#fdf2f8",
-Placeholder=Color3.fromHex"#d67aa6",
-Background=Color3.fromHex"#1f0308",
-Button=Color3.fromHex"#e11d48",
-Icon=Color3.fromHex"#fb7185",
-},
-Plant={
-Name="Plant",
-
-Accent=Color3.fromHex"#166534",
-Dialog=Color3.fromHex"#052e16",
-Outline=Color3.fromHex"#bbf7d0",
-Text=Color3.fromHex"#f0fdf4",
-Placeholder=Color3.fromHex"#4fbf7a",
-Background=Color3.fromHex"#0a1b0f",
-Button=Color3.fromHex"#16a34a",
-Icon=Color3.fromHex"#4ade80",
-},
-Red={
-Name="Red",
-
-Accent=Color3.fromHex"#991b1b",
-Dialog=Color3.fromHex"#450a0a",
-Outline=Color3.fromHex"#fecaca",
-Text=Color3.fromHex"#fef2f2",
-Placeholder=Color3.fromHex"#d95353",
-Background=Color3.fromHex"#1c0606",
-Button=Color3.fromHex"#dc2626",
-Icon=Color3.fromHex"#ef4444",
-},
 Indigo={
 Name="Indigo",
 
@@ -1680,54 +1644,6 @@ Background=Color3.fromHex"#0f0a2e",
 Button=Color3.fromHex"#4f46e5",
 Icon=Color3.fromHex"#6366f1",
 },
-Sky={
-Name="Sky",
-
-Accent=Color3.fromHex"#0369a1",
-Dialog=Color3.fromHex"#0c4a6e",
-Outline=Color3.fromHex"#bae6fd",
-Text=Color3.fromHex"#f0f9ff",
-Placeholder=Color3.fromHex"#4fb6d9",
-Background=Color3.fromHex"#041f2e",
-Button=Color3.fromHex"#0284c7",
-Icon=Color3.fromHex"#0ea5e9",
-},
-Violet={
-Name="Violet",
-
-Accent=Color3.fromHex"#6d28d9",
-Dialog=Color3.fromHex"#3c1361",
-Outline=Color3.fromHex"#ddd6fe",
-Text=Color3.fromHex"#faf5ff",
-Placeholder=Color3.fromHex"#8f7ee0",
-Background=Color3.fromHex"#1e0a3e",
-Button=Color3.fromHex"#7c3aed",
-Icon=Color3.fromHex"#8b5cf6",
-},
-Amber={
-Name="Amber",
-
-Accent=Color3.fromHex"#b45309",
-Dialog=Color3.fromHex"#451a03",
-Outline=Color3.fromHex"#fde68a",
-Text=Color3.fromHex"#fffbeb",
-Placeholder=Color3.fromHex"#d1a326",
-Background=Color3.fromHex"#1c1003",
-Button=Color3.fromHex"#d97706",
-Icon=Color3.fromHex"#f59e0b",
-},
-Emerald={
-Name="Emerald",
-
-Accent=Color3.fromHex"#047857",
-Dialog=Color3.fromHex"#022c22",
-Outline=Color3.fromHex"#a7f3d0",
-Text=Color3.fromHex"#ecfdf5",
-Placeholder=Color3.fromHex"#3fbf8f",
-Background=Color3.fromHex"#011411",
-Button=Color3.fromHex"#059669",
-Icon=Color3.fromHex"#10b981",
-},
 Midnight={
 Name="Midnight",
 
@@ -1739,42 +1655,6 @@ Placeholder=Color3.fromHex"#2f74d1",
 Background=Color3.fromHex"#0a0f1e",
 Button=Color3.fromHex"#2563eb",
 Icon=Color3.fromHex"#3b82f6",
-},
-Crimson={
-Name="Crimson",
-
-Accent=Color3.fromHex"#b91c1c",
-Dialog=Color3.fromHex"#450a0a",
-Outline=Color3.fromHex"#fca5a5",
-Text=Color3.fromHex"#fef2f2",
-Placeholder=Color3.fromHex"#6f757b",
-Background=Color3.fromHex"#0c0404",
-Button=Color3.fromHex"#991b1b",
-Icon=Color3.fromHex"#dc2626",
-},
-MonokaiPro={
-Name="Monokai Pro",
-
-Accent=Color3.fromHex"#fc9867",
-Dialog=Color3.fromHex"#1e1e1e",
-Outline=Color3.fromHex"#78dce8",
-Text=Color3.fromHex"#fcfcfa",
-Placeholder=Color3.fromHex"#6f6f6f",
-Background=Color3.fromHex"#191622",
-Button=Color3.fromHex"#ab9df2",
-Icon=Color3.fromHex"#a9dc76",
-},
-CottonCandy={
-Name="Cotton Candy",
-
-Accent=Color3.fromHex"#ec4899",
-Dialog=Color3.fromHex"#2d1b3d",
-Outline=Color3.fromHex"#f9a8d4",
-Text=Color3.fromHex"#fdf2f8",
-Placeholder=Color3.fromHex"#8a5fd3",
-Background=Color3.fromHex"#1a0b2e",
-Button=Color3.fromHex"#d946ef",
-Icon=Color3.fromHex"#06b6d4",
 },
 Rainbow={
 Name="Rainbow",
@@ -1924,179 +1804,6 @@ al,
 })
 
 return am
-end
-
-
-return aa end function a.u()
-local aa={}
-
-local ab=game:GetService"UserInputService"
-
-local ac=a.load'b'
-local ad=ac.New local ae=
-ac.Tween
-
-
-function aa.New(af,ag,ah,ai)
-local aj=ad("Frame",{
-Size=UDim2.new(0,ai,1,0),
-BackgroundTransparency=1,
-Position=UDim2.new(1,0,0,0),
-AnchorPoint=Vector2.new(1,0),
-Parent=ag,
-ZIndex=999,
-Active=true,
-})
-
-local ak=ac.NewRoundFrame(ai/2,"Squircle",{
-Size=UDim2.new(1,0,0,0),
-ImageTransparency=0.85,
-ThemeTag={ImageColor3="Text"},
-Parent=aj,
-})
-
-local al=ad("Frame",{
-Size=UDim2.new(1,12,1,12),
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-BackgroundTransparency=1,
-Active=true,
-ZIndex=999,
-Parent=ak,
-})
-
-local am=false
-local an=0
-
-local function updateSliderSize()
-local ao=af
-local ap=ao.AbsoluteCanvasSize.Y
-local aq=ao.AbsoluteWindowSize.Y
-
-if ap<=aq then
-ak.Visible=false
-return
-end
-
-local ar=math.clamp(aq/ap,0.1,1)
-ak.Size=UDim2.new(1,0,ar,0)
-ak.Visible=true
-end
-
-local function updateScrollingFramePosition()
-local ao=ak.Position.Y.Scale
-local ap=af.AbsoluteCanvasSize.Y
-local aq=af.AbsoluteWindowSize.Y
-local ar=math.max(ap-aq,0)
-
-if ar<=0 then return end
-
-local as=math.max(1-ak.Size.Y.Scale,0)
-if as<=0 then return end
-
-local at=ao/as
-
-af.CanvasPosition=Vector2.new(
-af.CanvasPosition.X,
-at*ar
-)
-end
-
-local function updateThumbPosition()
-if am then return end
-
-local ao=af.CanvasPosition.Y
-local ap=af.AbsoluteCanvasSize.Y
-local aq=af.AbsoluteWindowSize.Y
-local ar=math.max(ap-aq,0)
-
-if ar<=0 then
-ak.Position=UDim2.new(0,0,0,0)
-return
-end
-
-local as=ao/ar
-local at=math.max(1-ak.Size.Y.Scale,0)
-local au=math.clamp(as*at,0,at)
-
-ak.Position=UDim2.new(0,0,au,0)
-end
-
-ac.AddSignal(aj.InputBegan,function(ao)
-if(ao.UserInputType==Enum.UserInputType.MouseButton1 or ao.UserInputType==Enum.UserInputType.Touch)then
-local ap=ak.AbsolutePosition.Y
-local aq=ap+ak.AbsoluteSize.Y
-
-if not(ao.Position.Y>=ap and ao.Position.Y<=aq)then
-local ar=aj.AbsolutePosition.Y
-local as=aj.AbsoluteSize.Y
-local at=ak.AbsoluteSize.Y
-
-local au=ao.Position.Y-ar-at/2
-local av=as-at
-
-local aw=math.clamp(au/av,0,1-ak.Size.Y.Scale)
-
-ak.Position=UDim2.new(0,0,aw,0)
-updateScrollingFramePosition()
-end
-end
-end)
-
-ac.AddSignal(al.InputBegan,function(ao)
-if ao.UserInputType==Enum.UserInputType.MouseButton1 or ao.UserInputType==Enum.UserInputType.Touch then
-am=true
-an=ao.Position.Y-ak.AbsolutePosition.Y
-
-local ap
-local aq
-
-ap=ab.InputChanged:Connect(function(ar)
-if ar.UserInputType==Enum.UserInputType.MouseMovement or ar.UserInputType==Enum.UserInputType.Touch then
-local as=aj.AbsolutePosition.Y
-local at=aj.AbsoluteSize.Y
-local au=ak.AbsoluteSize.Y
-
-local av=ar.Position.Y-as-an
-local aw=at-au
-
-local ax=math.clamp(av/aw,0,1-ak.Size.Y.Scale)
-
-ak.Position=UDim2.new(0,0,ax,0)
-updateScrollingFramePosition()
-end
-end)
-
-aq=ab.InputEnded:Connect(function(ar)
-if ar.UserInputType==Enum.UserInputType.MouseButton1 or ar.UserInputType==Enum.UserInputType.Touch then
-am=false
-if ap then ap:Disconnect()end
-if aq then aq:Disconnect()end
-end
-end)
-end
-end)
-
-ac.AddSignal(af:GetPropertyChangedSignal"AbsoluteWindowSize",function()
-updateSliderSize()
-updateThumbPosition()
-end)
-
-ac.AddSignal(af:GetPropertyChangedSignal"AbsoluteCanvasSize",function()
-updateSliderSize()
-updateThumbPosition()
-end)
-
-ac.AddSignal(af:GetPropertyChangedSignal"CanvasPosition",function()
-if not am then
-updateThumbPosition()
-end
-end)
-
-updateSliderSize()
-updateThumbPosition()
-
-return aj
 end
 
 
@@ -2541,149 +2248,6 @@ end
 
 return af
 end
-
-
-
-return aa end function a.y()
-local aa={}
-
-local ab=a.load'b'
-local ac=ab.New
-local ad=ab.Tween
-
-
-function aa.New(ae,af)
-local ag={
-Container=nil,
-ToolTipSize=16,
-}
-
-local ah=ac("TextLabel",{
-AutomaticSize="XY",
-TextWrapped=true,
-BackgroundTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
-Text=ae,
-TextSize=17,
-TextTransparency=1,
-ThemeTag={
-TextColor3="Text",
-}
-})
-
-local ai=ac("UIScale",{
-Scale=.9
-})
-
-local aj=ac("Frame",{
-AnchorPoint=Vector2.new(0.5,0),
-AutomaticSize="XY",
-BackgroundTransparency=1,
-Parent=af,
-
-Visible=false
-},{
-ac("UISizeConstraint",{
-MaxSize=Vector2.new(400,math.huge)
-}),
-ac("Frame",{
-AutomaticSize="XY",
-BackgroundTransparency=1,
-LayoutOrder=99,
-Visible=false
-},{
-ac("ImageLabel",{
-Size=UDim2.new(0,ag.ToolTipSize,0,ag.ToolTipSize/2),
-BackgroundTransparency=1,
-Rotation=180,
-Image="rbxassetid://89524607682719",
-ThemeTag={
-ImageColor3="Accent",
-},
-},{
-ac("ImageLabel",{
-Size=UDim2.new(0,ag.ToolTipSize,0,ag.ToolTipSize/2),
-BackgroundTransparency=1,
-LayoutOrder=99,
-ImageTransparency=.9,
-Image="rbxassetid://89524607682719",
-ThemeTag={
-ImageColor3="Text",
-},
-}),
-}),
-}),
-ab.NewRoundFrame(14,"Squircle",{
-AutomaticSize="XY",
-ThemeTag={
-ImageColor3="Accent",
-},
-ImageTransparency=1,
-Name="Background",
-},{
-
-
-
-ac("Frame",{
-ThemeTag={
-BackgroundColor3="Text",
-},
-AutomaticSize="XY",
-BackgroundTransparency=1,
-},{
-ac("UICorner",{
-CornerRadius=UDim.new(0,16),
-}),
-ac("UIListLayout",{
-Padding=UDim.new(0,12),
-FillDirection="Horizontal",
-VerticalAlignment="Center"
-}),
-
-ah,
-ac("UIPadding",{
-PaddingTop=UDim.new(0,12),
-PaddingLeft=UDim.new(0,12),
-PaddingRight=UDim.new(0,12),
-PaddingBottom=UDim.new(0,12),
-}),
-})
-}),
-ai,
-ac("UIListLayout",{
-Padding=UDim.new(0,0),
-FillDirection="Vertical",
-VerticalAlignment="Center",
-HorizontalAlignment="Center",
-}),
-})
-ag.Container=aj
-
-function ag.Open(ak)
-aj.Visible=true
-
-
-ad(aj.Background,.2,{ImageTransparency=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(ah,.2,{TextTransparency=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(ai,.18,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end
-
-function ag.Close(ak)
-
-ad(aj.Background,.3,{ImageTransparency=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(ah,.3,{TextTransparency=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(ai,.35,{Scale=.9},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-
-task.wait(.35)
-
-aj.Visible=false
-aj:Destroy()
-end
-
-return ag
-end
-
-
 
 return aa end function a.z()
 local aa=a.load'b'
@@ -5380,14 +4944,10 @@ end,
 
 }end function a.T()
 game:GetService"UserInputService"
-local ac=game.Players.LocalPlayer:GetMouse()
 
 local ae=a.load'b'
 local ag=ae.New
 local ai=ae.Tween
-
-local aj=a.load'y'.New
-local ak=a.load'u'.New
 
 
 
@@ -5400,7 +4960,6 @@ Tabs={},
 Containers={},
 SelectedTab=nil,
 TabCount=0,
-ToolTipParent=nil,
 TabHighlight=nil,
 
 OnChangeFunc=function(al)end
@@ -5409,7 +4968,6 @@ OnChangeFunc=function(al)end
 function al.Init(am,an,ao,ap)
 Window=am
 WindUI=an
-al.ToolTipParent=ao
 al.TabHighlight=ap
 return al
 end
@@ -5647,64 +5205,12 @@ al:SelectTab(ap)
 end
 end)
 
-if Window.ScrollBarEnabled then
-ak(ao.UIElements.ContainerFrame,ao.UIElements.ContainerFrameCanvas,Window,3)
-end
-
-local at
-local au
-local av
-local aw=false
-
-
-
-if ao.Desc then
-
-
-ae.AddSignal(ao.UIElements.Main.InputBegan,function()
-aw=true
-au=task.spawn(function()
-task.wait(0.35)
-if aw and not at then
-at=aj(ao.Desc,al.ToolTipParent)
-
-local function updatePosition()
-if at then
-at.Container.Position=UDim2.new(0,ac.X,0,ac.Y-20)
-end
-end
-
-updatePosition()
-av=ac.Move:Connect(updatePosition)
-at:Open()
-end
-end)
-end)
-
-end
-
 ae.AddSignal(ao.UIElements.Main.MouseEnter,function()
 if not ao.Locked then
 ai(ao.UIElements.Main.Frame,0.08,{ImageTransparency=.97}):Play()
 end
 end)
 ae.AddSignal(ao.UIElements.Main.InputEnded,function()
-if ao.Desc then
-aw=false
-if au then
-task.cancel(au)
-au=nil
-end
-if av then
-av:Disconnect()
-av=nil
-end
-if at then
-at:Close()
-at=nil
-end
-end
-
 if not ao.Locked then
 ai(ao.UIElements.Main.Frame,0.08,{ImageTransparency=1}):Play()
 end
@@ -6601,7 +6107,6 @@ local ak=ai.Tween
 
 local al=a.load't'.New
 local am=a.load'j'.New
-local an=a.load'u'.New
 local ao=a.load'v'
 
 
@@ -6820,10 +6325,6 @@ AnchorPoint=Vector2.new(0,1),
 }),
 ar.UIElements.SideBar,
 })
-
-if ar.ScrollBarEnabled then
-an(ar.UIElements.SideBar,ar.UIElements.SideBarContainer.Content,ar,3)
-end
 
 
 ar.UIElements.MainBar=aj("Frame",{
@@ -7920,7 +7421,7 @@ end
 
 local m=a.load'T'
 local p=a.load'U'
-local r=m.Init(ar,aq.WindUI,aq.Parent.Parent.ToolTips)
+local r=m.Init(ar,aq.WindUI)
 r:OnChange(function(u)ar.CurrentTab=u end)
 
 ar.TabModule=m
@@ -8381,9 +7882,6 @@ Name="Window"
 
 al("Folder",{
 Name="Popups"
-}),
-al("Folder",{
-Name="ToolTips"
 })
 })
 
