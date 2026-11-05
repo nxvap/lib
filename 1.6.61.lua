@@ -408,6 +408,10 @@ function m.Icon(p,r)
 return j.Icon(p,nil,r~=false)
 end
 
+function m.AddIcons(p,r)
+return j.AddIcons(p,r)
+end
+
 function m.New(p,r,u)
 local v=Instance.new(p)
 
@@ -512,6 +516,10 @@ end
 
 local p=m.New local r=
 m.Tween
+
+function m.SetDraggable(u)
+m.CanDraggable=u
+end
 
 
 
@@ -2229,6 +2237,9 @@ af:SetIcon(ap.Icon)
 end
 
 al.UIStroke.UIGradient.Color=ap.Color
+if Glow then
+Glow.UIGradient.Color=ap.Color
+end
 
 al.UICorner.CornerRadius=ap.CornerRadius
 al.TextButton.UICorner.CornerRadius=UDim.new(ap.CornerRadius.Scale,ap.CornerRadius.Offset-4)
@@ -2844,14 +2855,7 @@ end
 af.UIElements.Container.TitleFrame.TitleFrame.Size=UDim2.new(1,-aj,1,0)
 end
 
-function m.RemoveThemeObject(p)
-m.Objects[p]=nil
-end
-
 function af.Destroy(aD)
-if aa.RemoveThemeObject then
-aa.RemoveThemeObject(aB)
-end
 aB:Destroy()
 end
 
@@ -5895,7 +5899,6 @@ end
 
 function am.Close(as)
 task.spawn(function()
-al()
 aq.Frame.Visible=false
 ai(ar.UIScale,.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
@@ -6814,6 +6817,19 @@ ar.IconThemed,
 g.Parent=ar.UIElements.Main.Main.Topbar.Left
 g.Size=UDim2.new(0,ar.IconSize,0,ar.IconSize)
 
+ar.OpenButtonMain:SetIcon(ar.Icon)
+
+
+
+
+
+
+
+
+
+
+
+else
 ar.OpenButtonMain:SetIcon(ar.Icon)
 
 end
