@@ -2844,7 +2844,14 @@ end
 af.UIElements.Container.TitleFrame.TitleFrame.Size=UDim2.new(1,-aj,1,0)
 end
 
+function m.RemoveThemeObject(p)
+m.Objects[p]=nil
+end
+
 function af.Destroy(aD)
+if aa.RemoveThemeObject then
+aa.RemoveThemeObject(aB)
+end
 aB:Destroy()
 end
 
@@ -3119,7 +3126,7 @@ ThemeTag={
 ImageColor3="Text"
 },
 Parent=ag,
-Size=UDim2.new(0,ai and(52)or(40.8),0,24),
+Size=UDim2.new(0,ai and(56)or(41.6),0,26),
 },{
 ab.NewRoundFrame(ak,"Squircle",{
 Size=UDim2.new(1,0,1,0),
@@ -3146,45 +3153,16 @@ NumberSequenceKeypoint.new(1,1),
 
 
 ab.NewRoundFrame(ak,"Squircle",{
-Size=UDim2.new(0,ai and 30 or 20,0,20),
+Size=UDim2.new(0,ai and 32 or 22,0,22),
 Position=UDim2.new(0,2,0.5,0),
 AnchorPoint=Vector2.new(0,0.5),
-ImageTransparency=1,
+ImageTransparency=0,
+ImageColor3=Color3.new(1,1,1),
+
+
+
 Name="Frame",
 },{
-ab.NewRoundFrame(ak,"Squircle",{
-Size=UDim2.new(1,0,1,0),
-ImageTransparency=0,
-AnchorPoint=Vector2.new(0.5,0.5),
-Position=UDim2.new(0.5,0,0.5,0),
-Name="Bar",
-},{
-ab.NewRoundFrame(999,"SquircleGlass",{
-Size=UDim2.new(1,1,1,1),
-ImageColor3=Color3.new(1,1,1),
-Name="Highlight",
-ImageTransparency=0.5,
-AnchorPoint=Vector2.new(0.5,0.5),
-Position=UDim2.new(0.5,0,0.5,0),
-}),
-ab.NewRoundFrame(ak,"Squircle",{
-Size=UDim2.new(1,0,1,0),
-Name="GlassBackground",
-ImageTransparency=0,
-ThemeTag={
-ImageColor3="ElementBackground",
-},
-ZIndex=-1,
-}),
-ab.NewRoundFrame(ak,"Squircle",{
-Size=UDim2.new(1,0,1,0),
-Name="BarOverlay",
-ThemeTag={
-ImageColor3="White",
-},
-ZIndex=999,
-}),
-}),
 al,
 })
 })
@@ -3192,9 +3170,10 @@ al,
 
 function aj.Set(an,ao,ap)
 if ao then
-ad(am.Frame,0.35,{
-Position=UDim2.new(1,-(ai and 30 or 20)-2,0.5,0),
-},Enum.EasingStyle.Back,Enum.EasingDirection.Out):Play()
+ad(am.Frame,0.15,{
+Position=UDim2.new(1,-(ai and 32 or 22)-2,0.5,0),
+
+},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 ad(am.Layer,0.1,{
 ImageTransparency=0,
 }):Play()
@@ -3208,9 +3187,10 @@ ImageTransparency=0,
 }):Play()
 end
 else
-ad(am.Frame,0.35,{
+ad(am.Frame,0.15,{
 Position=UDim2.new(0,2,0.5,0),
-},Enum.EasingStyle.Back,Enum.EasingDirection.Out):Play()
+
+},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 ad(am.Layer,0.1,{
 ImageTransparency=1,
 }):Play()
@@ -3232,6 +3212,8 @@ if ah and ap then
 ab.SafeCallback(ah,ao)
 end
 end)
+
+
 end
 
 return am,aj
@@ -3288,7 +3270,7 @@ ab.NewRoundFrame(ak,"SquircleOutline",{
 Size=UDim2.new(1,0,1,0),
 Name="Stroke",
 ImageColor3=Color3.new(1,1,1),
-ImageTransparency=0.85,
+ImageTransparency=1,
 },{
 ac("UIGradient",{
 Rotation=90,
@@ -3449,8 +3431,8 @@ Callback=ah.Callback or function()end,
 UIElements={},
 IsFocusing=false,
 
-Width=ah.Width or 130,
-TextBoxWidth=ah.Window.NewElements and 40 or 30,
+Width=130,
+TextBoxWidth=30,
 ThumbSize=13,
 }
 local aj
@@ -3496,8 +3478,6 @@ ai.UIElements.SliderIcon=aa.NewRoundFrame(99,"Squircle",{
 ImageTransparency=.95,
 Size=UDim2.new(1,-ai.TextBoxWidth-8,0,4),
 Name="Frame",
-AnchorPoint=Vector2.new(0.5,0.5),
-Position=UDim2.new(0.5,0,0.5,0),
 ThemeTag={
 ImageColor3="Text",
 },
@@ -3518,13 +3498,6 @@ ThemeTag={
 ImageColor3="Text",
 },
 Name="Thumb",
-},{
-aa.NewRoundFrame(999,"SquircleGlass",{
-Size=UDim2.new(1,0,1,0),
-ImageColor3=Color3.new(1,1,1),
-Name="Highlight",
-ImageTransparency=0.5,
-}),
 })
 })
 })
@@ -3616,7 +3589,7 @@ al:Disconnect()
 af=false
 ar.ScrollingEnabled=true
 
-ad(ai.UIElements.SliderIcon.Frame.Thumb,.2,{ImageTransparency=0,Size=UDim2.new(0,ah.Window.NewElements and(ai.ThumbSize*1.75)or(ai.ThumbSize+2),0,ai.ThumbSize+2)},Enum.EasingStyle.Quint,Enum.EasingDirection.InOut):Play()
+ad(ai.UIElements.SliderIcon.Frame.Thumb,.2,{Size=UDim2.new(0,ah.Window.NewElements and(ai.ThumbSize*1.75)or(ai.ThumbSize+2),0,ai.ThumbSize+2)},Enum.EasingStyle.Quint,Enum.EasingDirection.InOut):Play()
 end
 end)
 end
@@ -3663,7 +3636,7 @@ aa.AddSignal(ai.UIElements.SliderContainer.InputBegan,function(as)
 ai:Set(am,as)
 
 if as.UserInputType==Enum.UserInputType.MouseButton1 or as.UserInputType==Enum.UserInputType.Touch then
-ad(ai.UIElements.SliderIcon.Frame.Thumb,.24,{ImageTransparency=0.85,Size=UDim2.new(0,(ah.Window.NewElements and(ai.ThumbSize*1.75)or(ai.ThumbSize))+8,0,ai.ThumbSize+8)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+ad(ai.UIElements.SliderIcon.Frame.Thumb,.24,{Size=UDim2.new(0,(ah.Window.NewElements and(ai.ThumbSize*1.75)or(ai.ThumbSize))+8,0,ai.ThumbSize+8)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 end
 end)
 
